@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Extension</title>
+    <style>
+        body {
+            font-family: var(--vscode-font-family);
+            color: var(--vscode-foreground);
+            background-color: var(--vscode-editor-background);
+            padding: 20px;
+        }
+        .button {
+            background-color: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: 1px solid var(--vscode-button-border);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 2px;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: var(--vscode-button-hoverBackground);
+        }
+        .result-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--vscode-textCodeBlock-background);
+            border: 1px solid var(--vscode-panel-border);
+            border-radius: 3px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Python Extension Interface</h1>
+
+    <div class="buttons-section">
+        <button class="button" onclick="handleSayHello()">Say Hello</button>
+    </div>
+
+    <div class="result-area" id="result-area">
+        <div id="loading" style="display: none;">
+            <p>⏳ Processing request...</p>
+        </div>
+        <div id="success-result" style="display: none;">
+            <h3 style="color: var(--vscode-testing-iconPassed);">✓ Success</h3>
+            <p id="success-text"></p>
+        </div>
+        <div id="error-result" style="display: none;">
+            <h3 style="color: var(--vscode-testing-iconFailed);">✗ Error</h3>
+            <p id="error-text"></p>
+        </div>
+        <div id="initial-message">
+            <p>Click a button to see results...</p>
+        </div>
+    </div>
+
+    <script>
+        const vscode = acquireVsCodeApi();
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('success-result').style.display = 'none';
+            document.getElementById('error-result').style.display = 'none';
+            document.getElementById('initial-message').style.display = 'none';
+        }
+
+        function showResult(data, isError = false) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('initial-message').style.display = 'none';
+
+            if (isError) {
+                document.getElementById('error-text').textContent = data;
+                document.getElementById('error-result').style.display = 'block';
+                document.getElementById('success-result').style.display = 'none';
+            } else {
+                document.getElementById('success-text').textContent = data;
+                document.getElementById('success-result').style.display = 'block';
+                document.getElementById('error-result').style.display = 'none';
+            }
+        }
+
+        function handleSayHello() {
+            showLoading();
+            vscode.postMessage({
+                command: 'sayHello',
+                params: { name: 'from Visual Interface' }
+            });
+        }
+
+        window.addEventListener('message', event => {
+            const message = event.data;
+            if (message.type === 'result') {
+                showResult(message.data);
+            } else if (message.type === 'error') {
+                showResult(message.data, true);
+            }
+        });
+    </script>
+</body>
+</html>
