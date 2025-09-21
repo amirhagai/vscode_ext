@@ -122,6 +122,20 @@ async function handleWebviewMessage(message: any, panel: vscode.WebviewPanel, co
 				});
 			}
 			break;
+		case 'processPath':
+			try {
+				const result = await sendToPython('process_path', message.params, context);
+				panel.webview.postMessage({
+					type: 'result',
+					data: result
+				});
+			} catch (error) {
+				panel.webview.postMessage({
+					type: 'error',
+					data: `Error processing path: ${error}`
+				});
+			}
+			break;
 	}
 }
     

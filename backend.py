@@ -30,6 +30,26 @@ def main():
                 sys.stdout.flush()
                 logging.info("Response sent and flushed.")
 
+            elif method == "process_path":
+                path = request.get("params", {}).get("path", "")
+
+                # Log the received path
+                logging.info(f"Received path to process: {path}")
+
+                # You can add additional path processing here
+                # Note: Don't use print() as it interferes with JSON-RPC on stdout
+                logging.info(f"Processing path: {path}")  # Use logging instead
+
+                response = {
+                    "jsonrpc": "2.0",
+                    "id": request.get("id"),
+                    "result": f"Successfully processed path: {path}"
+                }
+                logging.info(f"Sending path processing response: {response}")
+                sys.stdout.write(json.dumps(response) + "\n")
+                sys.stdout.flush()
+                logging.info("Path processing response sent and flushed.")
+
         except Exception as e:
             logging.error(f"Error processing request: {e}", exc_info=True)
             sys.stderr.write(f"Error processing request: {e}\n")

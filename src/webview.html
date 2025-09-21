@@ -31,6 +31,34 @@
             border-radius: 3px;
             min-height: 100px;
         }
+        .path-input-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--vscode-panel-border);
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .path-input {
+            background-color: var(--vscode-input-background);
+            color: var(--vscode-input-foreground);
+            border: 1px solid var(--vscode-input-border);
+            padding: 8px 12px;
+            border-radius: 2px;
+            font-family: var(--vscode-editor-font-family);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .path-input:focus {
+            border-color: var(--vscode-focusBorder);
+            outline: none;
+        }
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -38,6 +66,15 @@
 
     <div class="buttons-section">
         <button class="button" onclick="handleSayHello()">Say Hello</button>
+    </div>
+
+    <div class="path-input-section">
+        <h2>Path Processor</h2>
+        <div class="input-group">
+            <label for="path-input">Enter file path:</label>
+            <input type="text" id="path-input" class="path-input" placeholder="/path/to/your/file.txt">
+            <button class="button" onclick="handleProcessPath()">Process Path</button>
+        </div>
     </div>
 
     <div class="result-area" id="result-area">
@@ -87,6 +124,22 @@
             vscode.postMessage({
                 command: 'sayHello',
                 params: { name: 'from Visual Interface' }
+            });
+        }
+
+        function handleProcessPath() {
+            const pathInput = document.getElementById('path-input');
+            const path = pathInput.value.trim();
+
+            if (!path) {
+                showResult('Please enter a path first', true);
+                return;
+            }
+
+            showLoading();
+            vscode.postMessage({
+                command: 'processPath',
+                params: { path: path }
             });
         }
 

@@ -23,3 +23,30 @@
 2025-09-21 15:21:07,046 - DEBUG - Parsed request: {'jsonrpc': '2.0', 'id': 1758457267024, 'method': 'say_hello', 'params': {'name': 'from Visual Interface'}}
 2025-09-21 15:21:07,046 - INFO - Sending response: {'jsonrpc': '2.0', 'id': 1758457267024, 'result': 'Hello, from Visual Interface!'}
 2025-09-21 15:21:07,046 - INFO - Response sent and flushed.
+2025-09-21 16:00:08,067 - INFO - Backend script started.
+2025-09-21 16:00:08,067 - INFO - Script executed as main.
+2025-09-21 16:00:08,067 - INFO - Main function entered. Waiting for stdin.
+2025-09-21 16:00:08,067 - INFO - Exiting main loop.
+2025-09-21 16:00:08,067 - INFO - Main function finished. Script terminating.
+2025-09-21 16:02:10,095 - INFO - Backend script started.
+2025-09-21 16:02:10,096 - INFO - Script executed as main.
+2025-09-21 16:02:10,096 - INFO - Main function entered. Waiting for stdin.
+2025-09-21 16:02:10,096 - INFO - Received line: {"jsonrpc":"2.0","id":1758459730072,"method":"process_path","params":{"path":"/hello"}}
+2025-09-21 16:02:10,096 - DEBUG - Parsed request: {'jsonrpc': '2.0', 'id': 1758459730072, 'method': 'process_path', 'params': {'path': '/hello'}}
+2025-09-21 16:02:10,096 - INFO - Received path to process: /hello
+2025-09-21 16:02:10,096 - INFO - Sending path processing response: {'jsonrpc': '2.0', 'id': 1758459730072, 'result': 'Successfully processed path: /hello'}
+2025-09-21 16:02:10,096 - INFO - Path processing response sent and flushed.
+2025-09-21 16:02:27,561 - INFO - Received line: {"jsonrpc":"2.0","id":1758459747560,"method":"process_path","params":{"path":"/home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md"}}
+2025-09-21 16:02:27,561 - DEBUG - Parsed request: {'jsonrpc': '2.0', 'id': 1758459747560, 'method': 'process_path', 'params': {'path': '/home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md'}}
+2025-09-21 16:02:27,561 - INFO - Received path to process: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md
+2025-09-21 16:02:27,561 - INFO - Sending path processing response: {'jsonrpc': '2.0', 'id': 1758459747560, 'result': 'Successfully processed path: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md'}
+2025-09-21 16:02:27,561 - INFO - Path processing response sent and flushed.
+2025-09-21 16:03:31,438 - INFO - Backend script started.
+2025-09-21 16:03:31,438 - INFO - Script executed as main.
+2025-09-21 16:03:31,438 - INFO - Main function entered. Waiting for stdin.
+2025-09-21 16:03:31,438 - INFO - Received line: {"jsonrpc":"2.0","id":1758459811413,"method":"process_path","params":{"path":"/home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md"}}
+2025-09-21 16:03:31,438 - DEBUG - Parsed request: {'jsonrpc': '2.0', 'id': 1758459811413, 'method': 'process_path', 'params': {'path': '/home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md'}}
+2025-09-21 16:03:31,438 - INFO - Received path to process: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md
+2025-09-21 16:03:31,438 - INFO - Processing path: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md
+2025-09-21 16:03:31,438 - INFO - Sending path processing response: {'jsonrpc': '2.0', 'id': 1758459811413, 'result': 'Successfully processed path: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md'}
+2025-09-21 16:03:31,438 - INFO - Path processing response sent and flushed.
