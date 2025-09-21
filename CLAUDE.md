@@ -4,23 +4,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a VS Code extension that demonstrates TypeScript frontend communicating with a Python backend via JSON-RPC over stdin/stdout. The extension provides a "Hello Python" command that spawns a Python process, sends a JSON-RPC request, and displays the response.
+This is a VS Code extension that demonstrates TypeScript frontend communicating with a Python backend via JSON-RPC over stdin/stdout. The extension provides a visual webview interface with buttons and form inputs that communicate with a persistent Python backend process.
 
 ## Architecture
 
-The project has two main components:
+The project has three main components:
 
 ### Frontend (TypeScript)
-- `src/extension.ts`: Main extension entry point with command registration and Python process management
-- Uses VS Code Extension API to register commands and show messages
-- Spawns Python subprocess using `child_process.spawn()`
-- Communicates via JSON-RPC protocol over stdin/stdout
+- `src/extension.ts`: Main extension entry point with webview panel creation and Python process management
+- Creates webview panels instead of showing popup messages
+- Manages persistent Python subprocess using `child_process.spawn()`
+- Handles bidirectional communication between webview and Python backend
+- Implements `sendToPython()` function for JSON-RPC communication
+
+### Webview Interface (HTML/CSS/JavaScript)
+- `src/webview.html`: Visual interface with VS Code theming integration
+- Contains "Say Hello" button and path input field with "Process Path" button
+- Uses VS Code CSS variables for consistent theming (light/dark/high-contrast)
+- Implements client-side validation and loading states
+- Communicates with extension via `vscode.postMessage()` and `window.addEventListener('message')`
 
 ### Backend (Python)
 - `backend.py`: JSON-RPC server that reads from stdin and writes responses to stdout
-- Implements a simple "say_hello" method
+- Implements `say_hello` and `process_path` methods
 - Logs all activity to `backend.log` for debugging
 - Uses stdin polling loop to handle multiple requests
+- **Critical**: Never use `print()` statements as they interfere with JSON-RPC communication on stdout
 
 ## Development Commands
 
@@ -62,24 +71,55 @@ npm run test            # Run VS Code extension tests using vscode-test
 The extension activates on the `my-python-extension.helloPython` command and contributes:
 - Command palette entry: "Hello Python"
 - Editor title bar button with play icon
-- Spawns `backend.py` with `python3` and communicates via JSON-RPC
+- Opens webview panel with visual interface instead of popup messages
+- Maintains persistent Python process for better performance
 
-## Communication Protocol
+## Communication Flow
 
-Frontend and backend communicate using JSON-RPC 2.0:
+1. **User Interaction**: User clicks buttons or inputs data in webview
+2. **Webview → Extension**: JavaScript sends messages via `vscode.postMessage()`
+3. **Extension → Python**: TypeScript forwards requests via JSON-RPC over stdin
+4. **Python → Extension**: Backend responds with JSON-RPC over stdout
+5. **Extension → Webview**: TypeScript forwards results via `panel.webview.postMessage()`
+6. **Webview Display**: JavaScript updates UI with success/error states
+
+## JSON-RPC Methods
+
+Currently supports two methods:
+
 ```typescript
-// Request format
+// Say Hello method
 {
   jsonrpc: '2.0',
   id: 1,
   method: 'say_hello',
-  params: { name: 'from VSCode' }
+  params: { name: 'from Visual Interface' }
 }
 
-// Response format
+// Process Path method
 {
   jsonrpc: '2.0',
-  id: 1,
-  result: 'Hello, from VSCode!'
+  id: 2,
+  method: 'process_path',
+  params: { path: '/path/to/file.txt' }
 }
 ```
+
+## Key Implementation Details
+
+### Python Process Management
+- Single persistent process shared across all requests
+- Process spawned in `startPythonProcess()` and reused
+- Proper cleanup in `deactivate()` function
+- Error handling for process stdio availability
+
+### Webview Theming
+- Uses VS Code CSS variables (e.g., `--vscode-button-background`)
+- Automatically adapts to user's theme (light/dark/high-contrast)
+- Input fields styled consistently with VS Code UI
+
+### Error Handling
+- Client-side validation (empty inputs)
+- JSON parsing errors in Python communication
+- Process communication failures
+- UI feedback for all error states
