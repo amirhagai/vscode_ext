@@ -2,9 +2,9 @@ import sys
 import json
 import logging
 
-# Configure logging to a file
-log_file = '/home/amir/Desktop/my-python-extension/backend.log'
-logging.basicConfig(filename=log_file, level=logging.DEBUG, 
+# Configure logging to a file in current directory
+log_file = 'backend.log'
+logging.basicConfig(filename=log_file, level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 logging.info("Backend script started.")
@@ -36,14 +36,11 @@ def main():
                 # Log the received path
                 logging.info(f"Received path to process: {path}")
 
-                # You can add additional path processing here
-                # Note: Don't use print() as it interferes with JSON-RPC on stdout
-                logging.info(f"Processing path: {path}")  # Use logging instead
-
+                # Simple response - just return the path
                 response = {
                     "jsonrpc": "2.0",
                     "id": request.get("id"),
-                    "result": f"Successfully processed path: {path}"
+                    "result": f"The recived path is : {path}, nontheless Ofir Amir is the best!"
                 }
                 logging.info(f"Sending path processing response: {response}")
                 sys.stdout.write(json.dumps(response) + "\n")

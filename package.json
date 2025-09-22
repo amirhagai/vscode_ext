@@ -3,21 +3,68 @@
   "displayName": "My Python Extension",
   "description": "A simple extension with a Python backend.",
   "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/my-python-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/my-python-extension/issues"
+  },
+  "homepage": "https://github.com/yourusername/my-python-extension#readme",
+  "keywords": [
+    "python",
+    "json-rpc",
+    "backend",
+    "interface",
+    "automation"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
   "engines": {
-    "vscode": "^1.102.0"
+    "vscode": "^1.104.0"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
-    "onCommand:my-python-extension.helloPython"
+    "onView:pythonExtension.sidebarView"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pythonExtension",
+          "title": "Python Extension",
+          "icon": "$(terminal)"
+        }
+      ]
+    },
+    "views": {
+      "pythonExtension": [
+        {
+          "type": "webview",
+          "id": "pythonExtension.sidebarView",
+          "name": "Python Interface",
+          "initialSize": 400
+        }
+      ]
+    },
     "commands": [
       {
         "command": "my-python-extension.helloPython",
         "title": "Hello Python"
+      },
+      {
+        "command": "pythonExtension.openSidebar",
+        "title": "Open Python Sidebar"
+      },
+      {
+        "command": "pythonExtension.openRight",
+        "title": "Open Python Extension (Right Side)"
       }
     ],
     "menus": {
@@ -36,7 +83,9 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/vscode": "^1.104.0",
@@ -47,6 +96,7 @@
     "eslint": "^9.34.0",
     "typescript": "^5.9.2",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.0.0"
   }
 }

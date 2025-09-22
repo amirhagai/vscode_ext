@@ -207,8 +207,8 @@ export function deactivate() {
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] TypeScript compilation succeeds: `npm run compile`
-- [ ] No linting errors: `npm run lint`
+- [x] TypeScript compilation succeeds: `npm run compile`
+- [x] No linting errors: `npm run lint`
 - [ ] Extension activates without errors in Development Host
 
 #### Manual Verification:
@@ -331,9 +331,9 @@ Initial release with sidebar view and Python backend communication.
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] vsce package creates .vsix file: `npm run package`
-- [ ] Extension manifest is valid: `vsce ls`
-- [ ] No package validation errors
+- [x] vsce package creates .vsix file: `npm run package`
+- [x] Extension manifest is valid: `vsce ls`
+- [x] No package validation errors
 - [ ] Icon file exists at correct size and format
 
 #### Manual Verification:

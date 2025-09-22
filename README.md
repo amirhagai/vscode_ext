@@ -1,71 +1,38 @@
-# my-python-extension README
+# Python Extension for VS Code
 
-This is the README for your extension "my-python-extension". After writing up a brief description, we recommend including the following sections.
+A VS Code extension that provides a visual interface for communicating with Python backends via JSON-RPC.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Sidebar Interface**: Persistent Python interaction panel in VS Code sidebar
+- **JSON-RPC Communication**: Reliable communication with Python backend processes
+- **Path Processing**: Input and process file paths through visual interface
+- **VS Code Integration**: Native theming and UI consistency
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code 1.102.0 or higher
+- Python 3.x installed and accessible via `python3` command
+
+## Usage
+
+1. Open VS Code
+2. Click the Python Extension icon in the activity bar
+3. Use the sidebar interface to interact with Python backend:
+   - Click "Say Hello" for basic communication test
+   - Enter file paths and click "Process Path" to send paths to backend
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+This extension contributes no settings currently.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Python process must be manually restarted if it crashes
+- File path validation is performed client-side only
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release with sidebar view and Python backend communication.

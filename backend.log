@@ -50,3 +50,13 @@
 2025-09-21 16:03:31,438 - INFO - Processing path: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md
 2025-09-21 16:03:31,438 - INFO - Sending path processing response: {'jsonrpc': '2.0', 'id': 1758459811413, 'result': 'Successfully processed path: /home/amir/Desktop/my-python-extension/path-input-enhancement-plan.md'}
 2025-09-21 16:03:31,438 - INFO - Path processing response sent and flushed.
+2025-09-22 09:52:19,787 - INFO - Backend script started.
+2025-09-22 09:52:19,788 - INFO - Script executed as main.
+2025-09-22 09:52:19,788 - INFO - Main function entered. Waiting for stdin.
+2025-09-22 09:52:19,788 - INFO - Received line: {"jsonrpc": "2.0", "id": 1, "method": "process_path", "params": {"path": "/test/path"}}
+2025-09-22 09:52:19,788 - DEBUG - Parsed request: {'jsonrpc': '2.0', 'id': 1, 'method': 'process_path', 'params': {'path': '/test/path'}}
+2025-09-22 09:52:19,788 - INFO - Received path to process: /test/path
+2025-09-22 09:52:19,788 - INFO - Sending path processing response: {'jsonrpc': '2.0', 'id': 1, 'result': 'Path received: /test/path'}
+2025-09-22 09:52:19,788 - INFO - Path processing response sent and flushed.
+2025-09-22 09:52:19,788 - INFO - Exiting main loop.
+2025-09-22 09:52:19,788 - INFO - Main function finished. Script terminating.
